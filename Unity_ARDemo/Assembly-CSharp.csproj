@@ -60,6 +60,7 @@
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\2022.3.38f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Common\Scripts\ARFeatheredPlaneMeshVisualizer.cs" />
     <Compile Include="Assets\ObtainCPUImage\Scripts\CpuImageSample.cs" />
     <Compile Include="Assets\ARScale\Scripts\RotationController.cs" />
     <Compile Include="Assets\RulerDrawer\Scripts\ARRuler.cs" />
@@ -67,7 +68,11 @@
     <Compile Include="Assets\ARScale\Scripts\ScaleController.cs" />
     <Compile Include="Assets\RulerDrawer\Scripts\RulerDrawer.cs" />
     <Compile Include="Assets\Extensions\Scripts\XROriginExtensions.cs" />
+    <Compile Include="Assets\ARPlaneDetect\Scripts\DetectionPlaneDetection.cs" />
     <Compile Include="Assets\RulerDrawer\Scripts\LineManager.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Assets\Common\Shader\FeatheredPlaneShader.shader" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
