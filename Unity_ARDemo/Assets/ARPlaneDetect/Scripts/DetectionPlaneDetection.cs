@@ -17,7 +17,7 @@ public class DetectionPlaneController: MonoBehaviour
 	public void TogglePlaneDetection()
 	{
 		_arPlaneMgr.enabled = !_arPlaneMgr.enabled;
-
+		
 		string planeDetectionMsg = "";
 		if(_arPlaneMgr.enabled)
 		{
