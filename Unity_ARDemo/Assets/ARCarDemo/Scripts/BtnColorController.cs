@@ -14,7 +14,7 @@ public class BtnColorController : MonoBehaviour
 	// For OnClick
 	public void OnChangeColor()
 	{
-		MessageTransceiver<ChangeCarColorMsg>.Broadcast(new ChangeCarColorMsg
+		InfoTransceiver<ChangeCarColorMsg>.Broadcast(new ChangeCarColorMsg
 		{
 			ChangeColor = _changeColor,
 		});

@@ -7,7 +7,6 @@ using UnityEngine.XR.ARFoundation;
 
 public class ARTapToPlaceObject : InitializeMonoBehaviour
 {
-
 	[SerializeField]
 	private ARRaycastManager _arRaycastMgr;
 	[SerializeField]
@@ -27,17 +26,17 @@ public class ARTapToPlaceObject : InitializeMonoBehaviour
 
 	public override void Initialize()
 	{
-		MessageTransceiver<OpenDoorMsg>.AddListener(OnOpenDoor);
-		MessageTransceiver<ResetMsg>.AddListener(OnResetAll);
-		MessageTransceiver<ChangeCarColorMsg>.AddListener(OnChangeColor); 
+		InfoTransceiver<OpenDoorMsg>.AddListener(OnOpenDoor);
+		InfoTransceiver<ResetMsg>.AddListener(OnResetAll);
+		InfoTransceiver<ChangeCarColorMsg>.AddListener(OnChangeColor); 
 		
 		_screenCenter = Camera.main.ViewportToScreenPoint(new Vector3(0.5f, 0.5f));
 	}
 	public override void Deinitialize()
 	{
-		MessageTransceiver<OpenDoorMsg>.AddListener(OnOpenDoor);
-		MessageTransceiver<ResetMsg>.RemoveListener(OnResetAll);
-		MessageTransceiver<ChangeCarColorMsg>.RemoveListener(OnChangeColor);
+		InfoTransceiver<OpenDoorMsg>.RemoveListener(OnOpenDoor);
+		InfoTransceiver<ResetMsg>.RemoveListener(OnResetAll);
+		InfoTransceiver<ChangeCarColorMsg>.RemoveListener(OnChangeColor);
 	}
 
 	private void Update()
@@ -60,7 +59,7 @@ public class ARTapToPlaceObject : InitializeMonoBehaviour
 	}
 	private void UpdatePlacementPose()
 	{
-		_arRaycastMgr.Raycast(_screenCenter, _hits, UnityEngine.XR.ARSubsystems.TrackableType.Planes);
+		_arRaycastMgr.Raycast(_screenCenter, _hits, UnityEngine.XR.ARSubsystems.TrackableType.PlaneWithinPolygon);
 
 		_canPlacementPose = _hits.Count > 0;
 		if (_canPlacementPose)
@@ -91,11 +90,12 @@ public class ARTapToPlaceObject : InitializeMonoBehaviour
 		_currentCarComp.transform.localPosition = _placementPose.position;
 		_currentCarComp.transform.localRotation = _placementPose.rotation;
 		_currentCarComp.transform.localScale = Vector3.one;
+		_currentCarComp.gameObject.SetActive(true);
 
 		_isPlaceObject = true;
 		_placementIndicator.SetActive(false);
 
-		MessageTransceiver<PlaceObjectMsg>.Broadcast(new PlaceObjectMsg()
+		InfoTransceiver<PlaceObjectMsg>.Broadcast(new PlaceObjectMsg()
 		{
 			IsPlace = true,
 		});

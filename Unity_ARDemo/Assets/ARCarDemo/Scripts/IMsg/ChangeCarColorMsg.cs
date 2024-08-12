@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public struct ChangeCarColorMsg : IMsg
+public struct ChangeCarColorMsg : IInfo
 {
 	public Color ChangeColor;
 }

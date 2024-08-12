@@ -1,3 +1,3 @@
-﻿public struct ResetMsg : IMsg
+﻿public struct ResetMsg : IInfo
 {
 }

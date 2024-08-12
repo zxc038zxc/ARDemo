@@ -12,9 +12,6 @@ public class InputController : MonoBehaviour
 	[SerializeField]
 	private float _ignoreScaleDist;
 
-	[SerializeField]
-	private Text _text;
-
 	public bool IsTouchUI
 	{
 		get { return _isTouchUI; }
@@ -31,9 +28,6 @@ public class InputController : MonoBehaviour
 		{
 			return;
 		}
-
-
-		_text.text = Input.touchCount.ToString();
 
 		if (Input.touchCount == 1)
 		{
@@ -55,7 +49,6 @@ public class InputController : MonoBehaviour
 			{
 				var twoPointNewDist = Vector2.Distance(touch1.position, touch2.position);
 				var dist = twoPointNewDist - _twoPointStartDist;
-				_text.text = twoPointNewDist.ToString();
 
 				if (Math.Abs(dist) > _ignoreScaleDist)
 				{

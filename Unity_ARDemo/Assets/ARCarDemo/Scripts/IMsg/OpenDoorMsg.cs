@@ -1,3 +1,3 @@
-﻿public struct OpenDoorMsg : IMsg
+﻿public struct OpenDoorMsg : IInfo
 {
 }

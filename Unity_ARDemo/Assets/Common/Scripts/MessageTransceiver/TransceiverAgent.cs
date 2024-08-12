@@ -7,7 +7,7 @@ public interface ITransceiver
 	void Release();
 }
 
-public interface ITransceiver<T> : ITransceiver where T : struct, IMsg
+public interface ITransceiver<T> : ITransceiver where T : struct, IInfo
 {
 	void AddListener(Action<T> handler);
 	void RemoveListener(Action<T> handler);
@@ -16,11 +16,11 @@ public interface ITransceiver<T> : ITransceiver where T : struct, IMsg
 
 public interface ITransceiverManager
 {
-	ITransceiver<T> GetTransceiver<T>() where T : struct, IMsg;
+	ITransceiver<T> GetTransceiver<T>() where T : struct, IInfo;
 	void Release();
 }
 
-public class TransceiverAgent<T>: ITransceiver<T> where T : struct, IMsg
+public class TransceiverAgent<T>: ITransceiver<T> where T : struct, IInfo
 {
 	private List<Action<T>> _action = new List<Action<T>>();
 	public void AddListener(Action<T> handler)

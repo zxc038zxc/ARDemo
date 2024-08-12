@@ -2,18 +2,18 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UnityMsgTransceiverMaanager: MonoBehaviour, ITransceiverManager
+public class UnityInfoTransceiverMaanager: InitializeMonoBehaviour, ITransceiverManager
 {
 	private Dictionary<Type, ITransceiver> _transceiver = new Dictionary<Type, ITransceiver>();
 
-	private void Awake()
+	public override void Initialize()
 	{
-		MessageTransceiver.SetTransceiverManager(this);
+		InfoTransceiver.SetTransceiverManager(this);
 	}
 
-	private void OnDestroy()
+	public override void Deinitialize()
 	{
-		MessageTransceiver.Release();
+		InfoTransceiver.Release();
 	}
 
 	public void Release()
@@ -21,14 +21,14 @@ public class UnityMsgTransceiverMaanager: MonoBehaviour, ITransceiverManager
 		_transceiver.Clear();
 	}
 
-	public ITransceiver<TMsg> GetTransceiver<TMsg>() where TMsg : struct, IMsg
+	public ITransceiver<T> GetTransceiver<T>() where T : struct, IInfo
 	{
-		if (_transceiver.ContainsKey(typeof(TMsg)))
+		if (_transceiver.ContainsKey(typeof(T)))
 		{
-			return (ITransceiver<TMsg>)_transceiver[typeof(TMsg)];
+			return (ITransceiver<T>)_transceiver[typeof(T)];
 		}
-		TransceiverAgent<TMsg> subTransceiver = new TransceiverAgent<TMsg>();
-		_transceiver[typeof(TMsg)] = subTransceiver;
+		TransceiverAgent<T> subTransceiver = new TransceiverAgent<T>();
+		_transceiver[typeof(T)] = subTransceiver;
 		return subTransceiver;
 	}
 }

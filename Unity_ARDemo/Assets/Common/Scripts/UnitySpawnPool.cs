@@ -50,7 +50,7 @@ public class UnitySpawnPool : MonoBehaviour
 		{
 			obj = Instantiate(sample).gameObject;
 		}
-
+		obj.SetActive(true);
 		_tagTable.Add(obj, tag);
 		return obj;
 	}

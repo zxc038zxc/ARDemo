@@ -1,4 +1,4 @@
-﻿public struct PlaceObjectMsg: IMsg
+﻿public struct PlaceObjectMsg: IInfo
 {
 	public bool IsPlace;
 }
